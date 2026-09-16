@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox minHeight="300.0" minWidth="400.0" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+   <children>
+       <HBox alignment="CENTER_LEFT" spacing="10">
+          <children>
+              <Label text="Title:" />
+              <TextField fx:id="titleField" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
+          </children>
+       </HBox>
+       <HBox alignment="CENTER_LEFT" spacing="10">
+          <children>
+              <Label text="Artist:" />
+              <TextField fx:id="artistField" HBox.hgrow="ALWAYS" VBox.vgrow="NEVER" />
+          </children>
+       </HBox>
+       <CheckBox fx:id="ownCheckBox" text="Own" VBox.vgrow="NEVER" />
+       <Label fx:id="playingTimeLabel" text="Playing time: 1" VBox.vgrow="NEVER" />
+       <Slider fx:id="playingTimeSlider" blockIncrement="60" majorTickUnit="60.0" max="360" min="0" showTickLabels="true" showTickMarks="true" VBox.vgrow="NEVER" />
+       <Label fx:id="numTracksLabel" text="Number of tracks: 0" VBox.vgrow="NEVER" />
+       <Slider fx:id="numTracksSlider" blockIncrement="5" majorTickUnit="5.0" max="40" min="0" showTickLabels="true" showTickMarks="true" VBox.vgrow="NEVER" />
+       <HBox alignment="CENTER_RIGHT" spacing="10" VBox.vgrow="ALWAYS">
+           <children>
+               <Button onAction="#handleCreateButton" text="Create" />
+               <Button fx:id="cancelButton" onAction="#handleCancelButton" text="Cancel" />
+           </children>
+       </HBox>
+   </children>
+</VBox>
