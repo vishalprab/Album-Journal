@@ -1,0 +1,46 @@
+
+name: Build Album Journal Installer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Set up Java 23
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "23"
+          cache: maven
+
+      - name: Build application
+        run: mvn -B clean package -DskipTests
+
+      - name: Copy runtime dependencies
+        run: mvn -B dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=target/lib
+
+      - name: Create Windows installer
+        shell: cmd
+        run: |
+          jpackage ^
+            --type exe ^
+            --name "Album Journal" ^
+            --app-version 1.0 ^
+            --input target ^
+            --main-jar com.musictracker-0.0.1-SNAPSHOT.jar ^
+            --main-class com.musictracker.Main ^
+            --module-path target/lib ^
+            --add-modules javafx.controls,javafx.fxml ^
+            --dest installer
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Album-Journal-Windows-Installer
+          path: installer/*.exe
